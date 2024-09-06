@@ -1,16 +1,7 @@
 // src/components/UserList.jsx
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 
-const UserList = ({ onEdit, onDelete }) => {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/users')
-      .then(response => setUsers(response.data))
-      .catch(error => console.error('Error fetching users:', error));
-  }, []);
-
+const UserList = ({ users, onEdit, onDelete }) => {
   return (
     <div>
       <h2>User List</h2>

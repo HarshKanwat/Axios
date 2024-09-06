@@ -8,6 +8,8 @@ const UserForm = ({ currentUser, onSave }) => {
   useEffect(() => {
     if (currentUser) {
       setUser(currentUser);
+    } else {
+      setUser({ name: '', email: '' });
     }
   }, [currentUser]);
 
@@ -18,15 +20,7 @@ const UserForm = ({ currentUser, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (user.id) {
-      axios.put(`https://jsonplaceholder.typicode.com/users/${user.id}`, user)
-        .then(response => onSave(response.data))
-        .catch(error => console.error('Error updating user:', error));
-    } else {
-      axios.post('https://jsonplaceholder.typicode.com/users', user)
-        .then(response => onSave(response.data))
-        .catch(error => console.error('Error adding user:', error));
-    }
+    onSave(user);
   };
 
   return (
